@@ -8,24 +8,16 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
-    // Finding the index of item if it exists already.
-    const idx = state.items.findIndex((item) => item.id === action.item.id);
-    let newItems, newTotalAmount;
-
-    if (idx !== -1) {
-      newItems = state.items[idx].amount + 1;
-      newTotalAmount = state.totalAmount + action.item.price;
-    } else {
-      newItems = state.items.concat(action.item);
-      newTotalAmount =
-        state.totalAmount + action.item.price * action.item.amount;
-    }
+    const newItems = state.items.concat(action.item);
+    const newTotalAmount =
+      state.totalAmount + action.item.price * action.item.amount;
 
     return {
       items: newItems,
       totalAmount: newTotalAmount,
     };
   }
+
   if (action.type === "REMOVE") {
   }
   return defaultCartState;
